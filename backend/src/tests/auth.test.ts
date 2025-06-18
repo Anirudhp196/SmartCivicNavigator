@@ -49,9 +49,10 @@ describe('Authentication Routes', () => {
         .send(testUser);
 
       expect(res.status).toBe(201);
-      expect(res.body).toHaveProperty('_id');
-      expect(res.body.email).toBe(testUser.email);
-      expect(res.body).not.toHaveProperty('password');
+      expect(res.body.success).toBe(true);
+      expect(res.body.data).toHaveProperty('_id');
+      expect(res.body.data.email).toBe(testUser.email);
+      expect(res.body.data).not.toHaveProperty('password');
       expect(res.headers['set-cookie']).toBeDefined();
     });
 
@@ -67,6 +68,7 @@ describe('Authentication Routes', () => {
         .send(testUser);
 
       expect(res.status).toBe(400);
+      expect(res.body.success).toBe(false);
       expect(res.body.message).toBe('User already exists');
     });
 
@@ -81,6 +83,7 @@ describe('Authentication Routes', () => {
         });
 
       expect(res.status).toBe(400);
+      expect(res.body.success).toBe(false);
     });
   });
 
@@ -101,8 +104,9 @@ describe('Authentication Routes', () => {
         });
 
       expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty('_id');
-      expect(res.body.email).toBe(testUser.email);
+      expect(res.body.success).toBe(true);
+      expect(res.body.data).toHaveProperty('_id');
+      expect(res.body.data.email).toBe(testUser.email);
       expect(res.headers['set-cookie']).toBeDefined();
     });
 
@@ -115,6 +119,7 @@ describe('Authentication Routes', () => {
         });
 
       expect(res.status).toBe(401);
+      expect(res.body.success).toBe(false);
       expect(res.body.message).toBe('Invalid email or password');
     });
 
@@ -127,6 +132,7 @@ describe('Authentication Routes', () => {
         });
 
       expect(res.status).toBe(401);
+      expect(res.body.success).toBe(false);
       expect(res.body.message).toBe('Invalid email or password');
     });
   });
@@ -157,8 +163,9 @@ describe('Authentication Routes', () => {
         .set('Cookie', jwtCookie);
 
       expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty('_id');
-      expect(res.body.email).toBe(testUser.email);
+      expect(res.body.success).toBe(true);
+      expect(res.body.data).toHaveProperty('_id');
+      expect(res.body.data.email).toBe(testUser.email);
     });
 
     it('should not get profile without token', async () => {
@@ -166,6 +173,7 @@ describe('Authentication Routes', () => {
         .get('/api/auth/me');
 
       expect(res.status).toBe(401);
+      expect(res.body.success).toBe(false);
       expect(res.body.message).toBe('Not authorized, no token');
     });
   });
@@ -176,6 +184,7 @@ describe('Authentication Routes', () => {
         .post('/api/auth/logout');
 
       expect(res.status).toBe(200);
+      expect(res.body.success).toBe(true);
       expect(res.headers['set-cookie'][0]).toMatch(/jwt=;/);
     });
   });
