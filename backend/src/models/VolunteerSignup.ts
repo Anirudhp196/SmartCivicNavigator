@@ -19,6 +19,12 @@ export interface IVolunteerSignup extends mongoose.Document {
     };
     createdAt: Date;
     updatedAt: Date;
+    checkIn(notes?: string): Promise<void>;
+    checkOut(notes?: string): Promise<void>;
+}
+
+interface IVolunteerSignupModel extends mongoose.Model<IVolunteerSignup> {
+    getUpcomingEvents(serviceId: IService['_id']): Promise<IVolunteerSignup[]>;
 }
 
 const volunteerSignupSchema = new mongoose.Schema({
@@ -172,4 +178,4 @@ volunteerSignupSchema.pre('save', async function(next) {
     next();
 });
 
-export const VolunteerSignup = mongoose.model<IVolunteerSignup>('VolunteerSignup', volunteerSignupSchema); 
+export const VolunteerSignup = mongoose.model<IVolunteerSignup, IVolunteerSignupModel>('VolunteerSignup', volunteerSignupSchema); 

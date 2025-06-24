@@ -16,6 +16,16 @@ export interface IDonation extends mongoose.Document {
     refundReason?: string;
     createdAt: Date;
     updatedAt: Date;
+    processRefund(reason: string): Promise<void>;
+}
+
+interface IDonationModel extends mongoose.Model<IDonation> {
+    getOrganizationStats(organizationId: IUser['_id']): Promise<{
+        totalAmount: number;
+        averageDonation: number;
+        totalDonors: number;
+        recurringDonations: number;
+    }[]>;
 }
 
 const donationSchema = new mongoose.Schema({
@@ -152,4 +162,4 @@ donationSchema.pre('save', function(next) {
     next();
 });
 
-export const Donation = mongoose.model<IDonation>('Donation', donationSchema); 
+export const Donation = mongoose.model<IDonation, IDonationModel>('Donation', donationSchema); 
