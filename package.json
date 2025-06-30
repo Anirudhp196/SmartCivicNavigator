@@ -4,7 +4,7 @@
   "description": "Backend for Smart Civic Navigator - A platform connecting communities with local social services",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "react-scripts start",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "test": "jest",
@@ -22,6 +22,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "morgan": "^1.10.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.6.3",
+    "react-scripts": "^5.0.1",
+    "tailwind": "^4.0.0",
+    "web-vitals": "^2.1.4",
     "winston": "^3.11.0"
   },
   "devDependencies": {
@@ -36,13 +41,28 @@
     "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
+    "autoprefixer": "^10.4.21",
     "eslint": "^8.56.0",
     "jest": "^29.7.0",
     "nodemon": "^3.0.3",
+    "postcss": "^8.5.6",
     "prettier": "^3.2.4",
     "supertest": "^6.3.4",
+    "tailwindcss": "^4.1.11",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^4.9.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
