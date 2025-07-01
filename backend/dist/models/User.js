@@ -32,7 +32,7 @@ const userSchema = new mongoose_1.default.Schema({
         },
         coordinates: {
             type: [Number],
-            required: true
+            required: false
         }
     },
     isNonProfit: {

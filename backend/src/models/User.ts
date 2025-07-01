@@ -33,17 +33,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  location: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      default: 'Point'
-    },
-    coordinates: {
-      type: [Number],
-      required: true
-    }
-  },
   isNonProfit: {
     type: Boolean,
     default: false
@@ -61,9 +50,6 @@ const userSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
-
-// Create geospatial index
-userSchema.index({ location: '2dsphere' });
 
 // Hash password before saving
 userSchema.pre('save', async function(next) {

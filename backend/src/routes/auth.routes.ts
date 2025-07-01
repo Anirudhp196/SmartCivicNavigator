@@ -41,10 +41,6 @@ const registerSchema: Schema = {
         notEmpty: true,
         errorMessage: 'Name is required'
     },
-    'location.coordinates': {
-        isArray: true,
-        errorMessage: 'Location coordinates are required'
-    },
     isNonProfit: {
         isBoolean: true
     },
@@ -103,7 +99,7 @@ router.post('/register',
     handleValidationErrors,
     async (req: Request, res: Response) => {
         try {
-            const { email, password, name, location, isNonProfit, organizationName } = req.body;
+            const { email, password, name, isNonProfit, organizationName } = req.body;
 
             const userExists = await User.findOne({ email });
             if (userExists) {
@@ -117,7 +113,6 @@ router.post('/register',
                 email,
                 password,
                 name,
-                location,
                 isNonProfit,
                 organizationName,
                 role: isNonProfit ? 'nonprofit-admin' : 'resident'

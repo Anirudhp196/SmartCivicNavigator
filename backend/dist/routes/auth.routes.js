@@ -43,6 +43,7 @@ const registerSchema = {
     },
     'location.coordinates': {
         isArray: true,
+        optional: true,
         errorMessage: 'Location coordinates are required'
     },
     isNonProfit: {

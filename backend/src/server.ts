@@ -19,10 +19,18 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Temporary: Broaden CORS to debug preflight. Ensure this is placed before routes.
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Keep this if you're sending cookies/auth headers
 }));
+
+// Handle preflight requests (OPTIONS method) explicitly
+app.options('*', cors()); // Respond to preflight requests for all routes
+
 app.use(cookieParser());
 app.use(morgan('dev'));
 
