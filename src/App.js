@@ -18,7 +18,7 @@ function App() {
         {/* Routes that use the Navbar layout */}
         <Route element={<LayoutWithNavbar />}>
           <Route path="/home" element={<HomePage />} />
-          <Route path="/map" element={<MapViewPage />} /> {/* New route for Map View */}
+          <Route path="/map" element={<MapViewPage />} />
           <Route path="/services/:id" element={<ServiceDetailPage />} />
           <Route path="/profile" element={<ProfileDashboardPage />} />
           {/* Add more routes here as needed that should have the Navbar */}
